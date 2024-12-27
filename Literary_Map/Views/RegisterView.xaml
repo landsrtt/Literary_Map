@@ -1,0 +1,23 @@
+﻿<Window x:Class="Literary_Map.Views.RegisterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Literary_Map.Views"
+        mc:Ignorable="d"
+        Title="RegisterView" Height="450" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        <Grid>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Name:" />
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Foreground="{StaticResource WhiteBrush}"/>
+                <TextBlock Text="Email:" />
+            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="200" Foreground="{StaticResource WhiteBrush}"/>
+                <TextBlock Text="Password:" />
+            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="200" Foreground="{StaticResource WhiteBrush}"/>
+                <TextBlock Text="Confirm Password:" />
+            <TextBox Text="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}" Width="200" Foreground="{StaticResource WhiteBrush}"/>
+                <Button Content="Register" Command="{Binding RegisterCommand}" Margin="0,10,0,0" />
+            </StackPanel>
+        </Grid>
+        </Window>

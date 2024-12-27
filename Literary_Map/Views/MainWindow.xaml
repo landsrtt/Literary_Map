@@ -1,0 +1,66 @@
+﻿<Window x:Class="Literary_Map.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        xmlns:local="clr-namespace:Literary_Map"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- Карта -->
+        <gmap:GMapControl x:Name="MapControl"
+                  Zoom="2"
+                  MinZoom="1"
+                  MaxZoom="18"
+                  Position="{Binding MapPosition, Mode=TwoWay}"
+                  MouseDoubleClick="MapControl_MouseDoubleClick"
+                  Loaded="MapControl_Loaded" />
+
+        <!-- Поиск и кнопка профиля -->
+
+        <TextBox x:Name="SearchBox" 
+         Width="200" 
+         Height="40" 
+         Margin="10" 
+         VerticalAlignment="Top" 
+         HorizontalAlignment="Left" 
+         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" TextChanged="SearchBox_TextChanged" Foreground="{StaticResource WhiteBrush}"/>
+       
+        <Button Content="Search" 
+                
+        Width="80" 
+        Height="30" 
+        Margin="220,10,0,0" 
+        VerticalAlignment="Top" 
+        HorizontalAlignment="Left" 
+        Command="{Binding Path=SearchCommand}" 
+        CommandParameter="{Binding SearchText}" />
+
+        <Button Content="Profile" Width="80" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="OnProfileClick" />
+
+        <!-- Всплывающая панель для книги -->
+
+        <Popup x:Name="BookPopup" Placement="Mouse" IsOpen="{Binding IsBookPopupOpen, Mode=TwoWay}">
+            <Border Background="White" Padding="10" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="{Binding SelectedDetailsBook.Title}" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedDetailsBook.Author}" FontStyle="Italic" />
+                    <TextBlock Text="{Binding SelectedDetailsBook.Genre}" />
+                    <TextBlock Text="{Binding SelectedDetailsBook.Description}" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding SelectedDetailsBook.Year}" />
+                    <Button Content="Добавить в избранное" 
+                    Width="150" 
+                    Height="30" 
+                    Margin="0,10,0,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    Command="{Binding Path=AddToFavoritesCommand}" />
+                    <Button Content="Закрыть" Command="{Binding CloseBookDetailsCommand}" Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+        </Popup>
+
+
+    </Grid>
+</Window>
